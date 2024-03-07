@@ -45,7 +45,7 @@ class _DetailsOfCollegeState extends State<DetailsOfCollege> {
               Spacer(),
               GestureDetector(
                 onTap: () {
-                  // _launchUrl();
+                  _launchURL(widget.college['web_pages'][0]);
                 },
                 child: Container(
                   padding: EdgeInsets.all(6),
@@ -74,10 +74,12 @@ class _DetailsOfCollegeState extends State<DetailsOfCollege> {
   }
 
   //Go to web Open
-//  Future<void> _launchUrl() async {
-//   if (!await launchUrl(widget.college['web_pages'].isEmpty ? "N/A": widget.college['web_pages'][0])) {
-//     throw Exception('Could not launch ${widget.college['web_pages'].isEmpty ? "N/A": widget.college['web_pages'][0]}');
-//   }
-// }
+Future<void> _launchURL(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
 }
 
